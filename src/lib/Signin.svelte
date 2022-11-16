@@ -22,7 +22,7 @@
       placeholder="Type here"
       class="input input-bordered w-full"
     />
-    <div class="btn w-full mt-2">Log in</div>
+    <div class="btn w-full mt-2 bg-indigo-500 text-white">Log in</div>
     <div class="label-text-alt text-gray-500 mt-4">
       Make an account? <b on:click={() => push("/signup")}> Signup here </b>
     </div>

@@ -4,6 +4,8 @@ import Signin from "./lib/Signin.svelte";
 import Home from "./lib/Home.svelte";
 import SearchResult from "./lib/SearchResult.svelte";
 import Journey from "./lib/Journey.svelte";
+import Add from "./lib/Add.svelte";
+import Edit from "./lib/Edit.svelte";
 const routes = {
   "/signin": Signin,
   "/signup": Signup,
@@ -11,5 +13,7 @@ const routes = {
   "/home": Home,
   "/search": SearchResult,
   "/journey": Journey,
+  "/add": Add,
+  "/edit": Edit,
 };
 export default routes;

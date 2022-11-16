@@ -1,5 +1,10 @@
 <script>
   let isReadJourney = false;
+  let data = {
+    journey: [
+      { title: "Andrew Tateism", personality: "INTP", author: "Andrew Gate" },
+    ],
+  };
 </script>
 
 <section
@@ -53,6 +58,15 @@
         <div class="label-text opacity-60">
           Joruneys you have added to Aurora
         </div>
+        {#each data.journey as j}
+          <div class=" border-y py-5  border-t-0">
+            <div class="text-xl font-bold">{j.title}</div>
+            <span class="badge bg-indigo-300 mt-3 text-indigo-800 font-bold"
+              >{j.personality}</span
+            >
+            <div class="mt-2">by <b>{j.author}</b></div>
+          </div>
+        {/each}
       </div>
     {/if}
   </div>

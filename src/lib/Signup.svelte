@@ -28,7 +28,7 @@
       placeholder="Type here"
       class="input input-bordered w-full "
     />
-    <div class="btn w-full">Log in</div>
+    <div class="btn w-full mt-2 bg-indigo-500 text-white">Sign up</div>
     <div class="label-text-alt text-gray-500 mt-4">
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       Already have an account?

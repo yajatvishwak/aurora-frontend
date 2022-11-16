@@ -102,7 +102,7 @@
       choice: "",
     },
   ];
-  let selectedTestNumber = 19;
+  let selectedTestNumber = 0;
   function calculatePersonality() {
     let finalPersonality = "";
     let a = 0;
