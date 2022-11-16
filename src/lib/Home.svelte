@@ -59,7 +59,13 @@
   <div class="modal-box">
     <SearchResult data={searchdata} {userpersonality} />
     <div class="modal-action">
-      <label for="my-modal-6" class="btn">Close</label>
+      <div
+        on:click={() => (isSearchModalOpen = false)}
+        for="my-modal-6"
+        class="btn"
+      >
+        Close
+      </div>
     </div>
   </div>
 </div>
