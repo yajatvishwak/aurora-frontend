@@ -4,5 +4,5 @@
 
 <div class="flex justify-between items-center">
   <img on:click={() => push("/home")} src="logo.png" class="h-10 " alt="" />
-  <div>Mr. Danny boi</div>
+  <div>{localStorage.getItem("username")}</div>
 </div>

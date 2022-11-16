@@ -1,4 +1,9 @@
 <script>
+  import axios from "axios";
+  import toast from "svelte-french-toast";
+  import { push } from "svelte-spa-router";
+  import baseurl from "./url.store";
+
   let test = [
     {
       a: "expend energy, enjoy groups",
@@ -103,7 +108,7 @@
     },
   ];
   let selectedTestNumber = 0;
-  function calculatePersonality() {
+  async function calculatePersonality() {
     let finalPersonality = "";
     let a = 0;
     let b = 0;
@@ -166,6 +171,16 @@
       finalPersonality += "P";
     }
     alert("final personality: " + finalPersonality);
+    const { data } = await axios.post($baseurl + "personality", {
+      username: localStorage.getItem("username"),
+      personality: finalPersonality,
+    });
+    if (data.code === "success") {
+      toast.success(data.message);
+      push("/home");
+    } else {
+      toast.error(data.message);
+    }
   }
 </script>
 
@@ -175,6 +190,8 @@
   <div class="flex flex-col">
     <img src="logo.png" alt="" />
   </div>
+  <div class="text-xl my-4">Personality Test</div>
+  <div class="opacity-50">Help us understand you better</div>
   <div>Choose one that you relate to the most</div>
 
   <div class="mt-3">

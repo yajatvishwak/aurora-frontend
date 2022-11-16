@@ -1,12 +1,27 @@
 <script>
+  import axios from "axios";
+  import { onMount } from "svelte";
+  import toast from "svelte-french-toast";
   import { push } from "svelte-spa-router";
   import Navbar from "./Navbar.svelte";
+  import baseurl from "./url.store";
 
   let isReadJourney = false;
+  onMount(async () => {
+    const res = await axios.post($baseurl + "home", {
+      username: localStorage.getItem("username"),
+    });
+    if (res && res.data) {
+      data = res.data;
+    } else {
+      toast.error("Something went terribly wrong. Ahaaaaa!");
+    }
+  });
   let data = {
+    name: "Yojat",
     journey: [
       {
-        journeyid: 1,
+        _id: 1,
         title: "Andrew Tateism",
         personality: "INTP",
         author: "Andrew Gate",
@@ -19,7 +34,7 @@
   class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-8 min-h-screen"
 >
   <Navbar />
-  <div class="text-2xl mt-8">Welcome Mr. Danny boi,</div>
+  <div class="text-2xl mt-8">Welcome, {data.name}</div>
   <div class="opacity-70">How is you feeling today?</div>
   <div class="mt-5 grid grid-cols-2 gap-3">
     <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -71,7 +86,7 @@
               <div class="flex gap-3">
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <svg
-                  on:click={() => push("/edit/" + j.journeyid)}
+                  on:click={() => push("/edit/" + j._id)}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -87,7 +102,7 @@
                 </svg>
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <svg
-                  on:click={() => push("/journey/" + j.journeyid)}
+                  on:click={() => push("/journey/" + j._id)}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

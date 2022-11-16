@@ -1,5 +1,24 @@
 <script>
+  import axios from "axios";
+  import toast from "svelte-french-toast";
+  import { push } from "svelte-spa-router";
   import Navbar from "./Navbar.svelte";
+  import baseurl from "./url.store";
+  let title = "";
+  async function create() {
+    if (title) {
+      const { data } = await axios.post($baseurl + "create-journey", {
+        title,
+        username: localStorage.getItem("username"),
+      });
+      if (data.code === "success") {
+        toast.success("Journey creation successful");
+        push("/home");
+      } else {
+        toast.error("Sign in failed : " + data.message);
+      }
+    }
+  }
 </script>
 
 <section
@@ -16,6 +35,7 @@
       class="input input-bordered w-full mt-3"
       placeholder="Title of your journey"
       name=""
+      bind:value={title}
       id=""
     />
     <div class="mt-3 opacity-60">Examples:</div>
@@ -23,6 +43,9 @@
       <div>> Handling mental health with physical</div>
       <div>> Moving into a new city</div>
     </div>
-    <div class="btn bg-indigo-500 mt-2 text-white">Start journey</div>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <div on:click={create} class="btn bg-indigo-500 mt-2 text-white">
+      Start journey
+    </div>
   </div>
 </section>

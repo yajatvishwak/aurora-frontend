@@ -1,8 +1,14 @@
 <script>
+  import axios from "axios";
+
   // @ts-nocheck
   import moment from "moment";
-  import SvelteHeatmap from "svelte-heatmap";
+  import { onMount } from "svelte";
+  import toast from "svelte-french-toast";
+
   import Navbar from "./Navbar.svelte";
+  import baseurl from "./url.store";
+  export let params = {};
   let showSummary = false;
   let data = {
     title: "My Journey towards getting placed",
@@ -26,6 +32,32 @@
       },
     ],
   };
+  onMount(async () => {
+    await fetchData();
+  });
+  async function fetchData() {
+    const res = await axios.post($baseurl + "get-journey", {
+      journeyid: params.journeyid,
+    });
+    if (res && res.data) {
+      // data = res.data;
+      console.log(res.data);
+      const stories = res.data.journey.journeys;
+      const formattedStories = stories.map((story) => {
+        return {
+          date: moment(story.date).format("DD MMMM, YYYY"),
+          content: story.text,
+        };
+      });
+      console.log(formattedStories);
+      data.story = formattedStories;
+      data.hasEnded = res.data.journey.journeyend;
+      data.author = res.data.journey.author;
+      data.title = res.data.journey.title;
+    } else {
+      toast.error("Something went terribly wrong. Ahaaaaa!");
+    }
+  }
 </script>
 
 <section
@@ -60,6 +92,6 @@
     <div class="divider ">Journey Begins</div>
   </div>
   <div class="mt-4">
-    <div class="" id="heatmap" />
+    <!-- <HeatMap /> -->
   </div>
 </section>

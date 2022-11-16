@@ -6,11 +6,16 @@
   let username, password;
   async function signin() {
     if (username && password) {
-      const { data } = await axios.post($baseurl + "signup");
+      const { data } = await axios.post($baseurl + "login", {
+        username,
+        password,
+      });
+      console.log(data);
       if (data.code === "success") {
         localStorage.setItem("userid", data.userid);
         localStorage.setItem("username", username);
         toast.success("Sign in successful");
+        push("/home");
       } else {
         toast.error("Sign in failed : " + data.message);
       }
@@ -32,12 +37,14 @@
     <label for="username" class="label-text self-start">Username</label>
     <input
       type="text"
+      bind:value={username}
       placeholder="Username"
       class="input input-bordered w-full"
     />
     <label for="username" class="label-text self-start">Password</label>
     <input
       type="password"
+      bind:value={password}
       placeholder="Type here"
       class="input input-bordered w-full"
     />
