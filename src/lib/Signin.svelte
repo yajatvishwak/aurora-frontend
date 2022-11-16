@@ -12,8 +12,9 @@
       });
       console.log(data);
       if (data.code === "success") {
-        localStorage.setItem("userid", data.userid);
+        localStorage.setItem("userid", data.data.userid);
         localStorage.setItem("username", username);
+        localStorage.setItem("personality", data.data.personality);
         toast.success("Sign in successful");
         push("/home");
       } else {

@@ -59,7 +59,7 @@
   <div class="modal-box">
     <SearchResult data={searchdata} {userpersonality} />
     <div class="modal-action">
-      <label for="my-modal-6" class="btn">Yay!</label>
+      <label for="my-modal-6" class="btn">Close</label>
     </div>
   </div>
 </div>
