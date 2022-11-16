@@ -56,6 +56,8 @@
       if (res.data.code === "success") {
         toast.success("Added Story to Journey");
         await fetchData();
+      } else {
+        toast.error("Something went terribly wrong. Ahaaaaa!");
       }
     } else {
       toast.error("Something went terribly wrong. Ahaaaaa!");

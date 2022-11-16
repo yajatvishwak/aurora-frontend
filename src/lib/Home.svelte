@@ -4,9 +4,14 @@
   import toast from "svelte-french-toast";
   import { push } from "svelte-spa-router";
   import Navbar from "./Navbar.svelte";
+  import SearchResult from "./SearchResult.svelte";
   import baseurl from "./url.store";
 
-  let isReadJourney = false;
+  let isSearchModalOpen = false;
+  let userpersonality = "";
+  let isReadJourney = true;
+  let searchdata = [];
+  let feeling = "";
   onMount(async () => {
     const res = await axios.post($baseurl + "home", {
       username: localStorage.getItem("username"),
@@ -28,7 +33,36 @@
       },
     ],
   };
+  async function sendFeeling() {
+    if (feeling) {
+      const res = await axios.post($baseurl + "find-journeys", {
+        username: localStorage.getItem("username"),
+        text: feeling,
+      });
+      console.log(res.data);
+      searchdata = res.data.journeys.map((item) => {
+        return {
+          title: item.title,
+          author: item.author,
+          journeyid: item.journeyid,
+          personality: item.personality,
+        };
+      });
+      userpersonality = res.data.userpersonality;
+      isSearchModalOpen = true;
+    }
+  }
 </script>
+
+<input type="checkbox" checked={isSearchModalOpen} class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <SearchResult data={searchdata} {userpersonality} />
+    <div class="modal-action">
+      <label for="my-modal-6" class="btn">Yay!</label>
+    </div>
+  </div>
+</div>
 
 <section
   class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-8 min-h-screen"
@@ -64,12 +98,17 @@
         </div>
 
         <textarea
+          bind:value={feeling}
           placeholder="Start typing here..."
           class="textarea w-full textarea-bordered mt-3 "
           id=""
           rows="10"
         />
-        <div class="btn w-full bg-indigo-600 my-3 text-white">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div
+          on:click={sendFeeling}
+          class="btn w-full bg-indigo-600 my-3 text-white"
+        >
           Get me Journeys to read
         </div>
       </div>

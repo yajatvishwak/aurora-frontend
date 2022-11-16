@@ -177,6 +177,7 @@
     });
     if (data.code === "success") {
       toast.success(data.message);
+      localStorage.setItem("personality", finalPersonality);
       push("/home");
     } else {
       toast.error(data.message);

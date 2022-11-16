@@ -54,6 +54,7 @@
       data.hasEnded = res.data.journey.journeyend;
       data.author = res.data.journey.author;
       data.title = res.data.journey.title;
+      data.textSummary = res.data.journey.summary;
     } else {
       toast.error("Something went terribly wrong. Ahaaaaa!");
     }
@@ -74,9 +75,7 @@
   </div>
   {#if showSummary}
     <div class="p-3 border rounded-md mt-3">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quae earum
-      aperiam natus totam itaque odit, corrupti quidem cum, mollitia voluptates
-      ipsam, alias similique consequuntur distinctio eveniet facilis amet sint.
+      {data.textSummary}
     </div>
   {/if}
   {#if data.hasEnded}
