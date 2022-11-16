@@ -22,26 +22,38 @@
       Start a Journey
     </div>
     <div
+      on:click={() => (isReadJourney = !isReadJourney)}
       class="border rounded-xl flex justify-center items-center p-3 btn btn-outline h-40"
     >
       Read a Journey
     </div>
   </div>
   <div class="mt-10">
-    <div class="">What do you want to ready about?</div>
-    <div class="label-text opacity-60">
-      Tell us about how you feel, what you are going through and what do you
-      expect to read?
-    </div>
+    {#if isReadJourney}
+      <div>
+        <div class="">What do you want to ready about?</div>
+        <div class="label-text opacity-60">
+          Tell us about how you feel, what you are going through and what do you
+          expect to read?
+        </div>
 
-    <textarea
-      placeholder="Start typing here..."
-      class="textarea w-full textarea-bordered mt-3 "
-      id=""
-      rows="10"
-    />
-    <div class="btn w-full bg-indigo-600 my-3 text-white">
-      Get me Journeys to read
-    </div>
+        <textarea
+          placeholder="Start typing here..."
+          class="textarea w-full textarea-bordered mt-3 "
+          id=""
+          rows="10"
+        />
+        <div class="btn w-full bg-indigo-600 my-3 text-white">
+          Get me Journeys to read
+        </div>
+      </div>
+    {:else}
+      <div>
+        <div class="">Your Journey</div>
+        <div class="label-text opacity-60">
+          Joruneys you have added to Aurora
+        </div>
+      </div>
+    {/if}
   </div>
 </section>
