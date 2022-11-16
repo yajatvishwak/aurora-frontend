@@ -1,6 +1,14 @@
 <script>
   import { onMount } from "svelte";
   import CalendarDates from "calendar-dates";
+  export const mood = {
+    10: "sad",
+    11: "happy",
+    12: "sad",
+    13: "sad",
+    14: "sad",
+  };
+
   const calendarDates = new CalendarDates();
   let mat = [];
   onMount(async () => {
@@ -22,11 +30,31 @@
         </div>
       {/if}
       {#if col.type === "current"}
-        <div
-          class="p-2 rounded-full border border-slate-400 text-center text-xs "
-        >
-          {col.date}
-        </div>
+        {#if Object.keys(mood).includes(col.date + "")}
+          {#if mood[col.date] === "happy"}
+            <div class="p-2 rounded-full bg-green-900 text-center text-xs ">
+              😁
+            </div>
+          {/if}
+          {#if mood[col.date] === "sad"}
+            <div class="p-2 rounded-full bg-red-900 text-center text-xs ">
+              😞
+            </div>
+          {/if}
+          {#if mood[col.date] === "neutral"}
+            <div
+              class="p-2 rounded-full border border-slate-400 text-center text-xs "
+            >
+              n
+            </div>
+          {/if}
+        {:else}
+          <div
+            class="p-2 rounded-full border border-slate-400 text-center text-xs "
+          >
+            {col.date}
+          </div>
+        {/if}
       {/if}
       {#if col.type === "next"}
         <div
