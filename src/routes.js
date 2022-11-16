@@ -12,8 +12,8 @@ const routes = {
   "/personality": Personality,
   "/home": Home,
   "/search": SearchResult,
-  "/journey": Journey,
+  "/journey/:journeyid": Journey,
   "/add": Add,
-  "/edit": Edit,
+  "/edit/:journeyid": Edit,
 };
 export default routes;

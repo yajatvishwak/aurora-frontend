@@ -1,31 +1,66 @@
+<script>
+  import Navbar from "./Navbar.svelte";
+  let data = {
+    story: [
+      {
+        date: "12th November",
+        content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident et
+        facilis incidunt dicta saepe voluptates est autem, repellendus aut sit
+        nisi eligendi quos, earum ad culpa consequatur! Voluptatem, rerum quo.`,
+      },
+      {
+        date: "13th November",
+        content: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident et
+        facilis incidunt dicta saepe voluptates est autem, repellendus aut sit
+        nisi eligendi quos, earum ad culpa consequatur! Voluptatem, rerum quo.`,
+      },
+    ],
+  };
+</script>
+
 <section
   class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-8 min-h-screen"
 >
-  <div class="flex justify-between ">
-    <img src="logo.png" class="h-10 " alt="" />
-    <img
-      src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e53508c8becbf15dd4f829c_peep-5.svg"
-      class=" bg-indigo-100 rounded-full w-10 h-10"
-      alt=""
-    />
-  </div>
+  <Navbar />
   <div class="text-xl mt-10 font-bold">
     Journeys are periodic blogs you can maintain on Aurora
   </div>
-  <div class="text-xl mt-10">Add your Journey</div>
+
+  <div class="mt-3 text-xl">Add a story</div>
   <div class="flex flex-col gap-2">
-    <input
+    <textarea
       type="text"
-      class="input input-bordered w-full mt-3"
-      placeholder="Title of your journey"
+      class=" textarea-bordered textarea w-full mt-3"
+      placeholder="What happened today?"
       name=""
       id=""
     />
-    <div class="mt-3 opacity-60">Examples:</div>
+    <div class="mt-3 opacity-60">Thought Starters:</div>
     <div class="flex flex-col gap-2">
-      <div>> Handling mental health with physical</div>
-      <div>> Moving into a new city</div>
+      <div>> What made you feel nice or sad today?</div>
+      <div>> An experience you would like to share</div>
+      <div>> Something you could do differently today</div>
     </div>
-    <div class="btn bg-indigo-500 mt-2 text-white">Start journey</div>
+    <div class="btn bg-indigo-500 mt-2 text-white">Add to journey</div>
+  </div>
+  <div class="divider" />
+  <div class="text-xl">Your journey so far</div>
+  <div class="flex flex-col gap-3">
+    {#each data.story as s}
+      <div class="mt-4">
+        <div class="underline font-bold">{s.date}</div>
+        <div>
+          {s.content}
+        </div>
+      </div>
+    {/each}
+  </div>
+  <div class="divider" />
+  <div class="flex flex-col">
+    <div class="text-xl">Other options</div>
+    <div class="flex justify-between mt-3">
+      <div>Mark as End</div>
+      <input type="checkbox" class="toggle" />
+    </div>
   </div>
 </section>

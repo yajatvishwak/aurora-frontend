@@ -1,4 +1,6 @@
 <script>
+  import Navbar from "./Navbar.svelte";
+
   let data = [
     {
       title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
@@ -30,14 +32,7 @@
 <section
   class="bg-slate-100 w-screen h-full flex flex-col dark:bg-slate-900 p-7 min-h-screen"
 >
-  <div class="flex justify-between ">
-    <img src="logo.png" class="h-10 " alt="" />
-    <img
-      src="https://assets.website-files.com/5e51c674258ffe10d286d30a/5e53508c8becbf15dd4f829c_peep-5.svg"
-      class=" bg-indigo-100 rounded-full w-10 h-10"
-      alt=""
-    />
-  </div>
+  <Navbar />
   <div class="text-lg mt-7">
     You's an INTP, and we found Journeys that you could find relevant
   </div>

@@ -1,9 +1,28 @@
 <script>
   import { push } from "svelte-spa-router";
+  import baseurl from "./url.store";
+  import axios from "axios";
+  import toast from "svelte-french-toast";
+  let username, password;
+  async function signin() {
+    if (username && password) {
+      const { data } = await axios.post($baseurl + "signup");
+      if (data.code === "success") {
+        localStorage.setItem("userid", data.userid);
+        localStorage.setItem("username", username);
+        toast.success("Sign in successful");
+      } else {
+        toast.error("Sign in failed : " + data.message);
+      }
+    }
+  }
 </script>
 
 <section class="bg-slate-100 w-screen h-screen dark:bg-slate-900 p-10">
-  <form class="flex flex-col items-center justify-center h-full gap-3">
+  <form
+    on:submit|preventDefault={signin}
+    class="flex flex-col items-center justify-center h-full gap-3"
+  >
     <div class="flex flex-col">
       <img src="logo.png" alt="" />
     </div>
@@ -22,7 +41,9 @@
       placeholder="Type here"
       class="input input-bordered w-full"
     />
-    <div class="btn w-full mt-2 bg-indigo-500 text-white">Log in</div>
+    <button type="submit" class="btn w-full mt-2 bg-indigo-500 text-white"
+      >Log in</button
+    >
     <div class="label-text-alt text-gray-500 mt-4">
       Make an account? <b on:click={() => push("/signup")}> Signup here </b>
     </div>
