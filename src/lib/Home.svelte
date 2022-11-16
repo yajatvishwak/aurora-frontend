@@ -59,6 +59,7 @@
   <div class="modal-box">
     <SearchResult data={searchdata} {userpersonality} />
     <div class="modal-action">
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         on:click={() => (isSearchModalOpen = false)}
         for="my-modal-6"

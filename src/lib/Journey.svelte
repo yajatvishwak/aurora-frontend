@@ -5,6 +5,7 @@
   import moment from "moment";
   import { onMount } from "svelte";
   import toast from "svelte-french-toast";
+  import HeatMap from "./HeatMap.svelte";
 
   import Navbar from "./Navbar.svelte";
   import baseurl from "./url.store";
@@ -91,6 +92,7 @@
     <div class="divider ">Journey Begins</div>
   </div>
   <div class="mt-4">
-    <!-- <HeatMap /> -->
+    <div class="opacity-50">Analysis of mood (Monthly)</div>
+    <HeatMap />
   </div>
 </section>

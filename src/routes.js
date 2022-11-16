@@ -11,7 +11,6 @@ const routes = {
   "/signup": Signup,
   "/personality": Personality,
   "/home": Home,
-  "/search": SearchResult,
   "/journey/:journeyid": Journey,
   "/add": Add,
   "/edit/:journeyid": Edit,
